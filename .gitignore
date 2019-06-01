@@ -1,0 +1,10 @@
+fdf_example
+fdf.dSYM
+libft/obj
+libft/libft.a
+obj
+fdf
+fdf.a
+.DS_Store
+Untitled.code-workspace
+.vscode
