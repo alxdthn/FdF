@@ -6,16 +6,11 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 16:39:20 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/02 00:06:06 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/02 19:09:46 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-#define LST_X ((t_info *)lst->content)->x
-#define LST_Y ((t_info *)lst->content)->y
-#define LST_Z ((t_info *)lst->content)->z
-#define LST_COLOR ((t_info *)lst->content)->color
 
 void	info_set(t_info *info)
 {
@@ -54,16 +49,17 @@ t_list	*get_file(char *file)
 {
 	t_list	*lst;
 	t_info	info;
-	char	*buf;
+	char	*str;
+	char	buf[BUFF];
 	ssize_t	ret;
 
 	lst = NULL;
-	if ((ret = ft_read_to_str(file, &buf, BUFF)) > 0)
+	if ((ret = ft_read_to_str(file, &str, BUFF)) > 0)
 	{
-		buf[ret - 1] = '\0';
+		str[ret - 1] = '\0';
 		info_set(&info);
-		get_file_core(buf, &lst, info);
-		ft_strdel(&buf);
+		get_file_core(str, &lst, info);
+		ft_strdel(&str);
 	}
 	return (lst);
 }
@@ -78,43 +74,42 @@ t_vector *set_one_vector(int x, int y)
 	return (vector);
 }
 
-t_point	***fdf_parce(char *file)
+t_point	***fdf_parce(char *file, int *points_x_count, int *points_y_count)
 {
 	t_point		***points;
 	t_list		*lst;
-	t_list		*tmp;
-	long		cur_y;
-	size_t		i;
+	size_t		cur_y;
+	size_t		x_size;
 
 	lst = get_file(file);
-	tmp = lst;
 	points = (t_point ***)malloc(sizeof(***points) * (LST_Y + 1));
 	points[LST_Y] = NULL;
-	i = LST_Y;
-	while (lst && i)
+	*points_x_count = LST_X;
+	*points_y_count = LST_Y;
+	while (lst)
 	{
-		points[LST_Y - 1] = (t_point **)malloc(sizeof(**points) * (LST_X + 1));
-		points[LST_Y - 1][0] = (t_point *)(long)LST_X;
+		points[LST_Y - 1] = (t_point **)malloc(sizeof(*points) * (LST_X + 1));
+		points[LST_Y - 1][LST_X] = NULL;
 		cur_y = LST_Y;
+		x_size = LST_X;
 		while (lst && LST_Y == cur_y)
 		{
-			points[LST_Y - 1][LST_X] = (t_point *)malloc(sizeof(*points));
-			if (LST_X < (int)points[LST_Y - 1][0])
-				points[LST_Y - 1][LST_X]->right = set_one_vector(LINE, 0);
+			points[LST_Y - 1][LST_X - 1] = (t_point *)malloc(sizeof(t_point));
+			if (LST_X < x_size)
+				points[LST_Y - 1][LST_X - 1]->right = set_one_vector(1, 0);
 			else
-				points[LST_Y - 1][LST_X]->right = NULL;
+				points[LST_Y - 1][LST_X - 1]->right = NULL;
 			if (points[LST_Y])
-				points[LST_Y - 1][LST_X]->down = set_one_vector(0, -LINE);
+				points[LST_Y - 1][LST_X - 1]->down = set_one_vector(0, -1);
 			else
-				points[LST_Y - 1][LST_X]->down = NULL;
-			points[LST_Y - 1][LST_X]->z = LST_Z;
-			points[LST_Y - 1][LST_X]->color = LST_COLOR;
-			points[LST_Y - 1][LST_X]->abs.x_abs = 0;
-			points[LST_Y - 1][LST_X]->abs.y_abs = 0; 
+				points[LST_Y - 1][LST_X - 1]->down = NULL;
+			points[LST_Y - 1][LST_X - 1]->z = LST_Z;
+			points[LST_Y - 1][LST_X - 1]->color = LST_COLOR;
+			points[LST_Y - 1][LST_X - 1]->abs.x_abs = 0;
+			points[LST_Y - 1][LST_X - 1]->abs.y_abs = 0;
 			lst = lst->next;
 		}
-		i--;
 	}
-	ft_lstdel(&tmp, ft_lstclear);
+	//ft_lstdel(&tmp, ft_lstclear);
 	return (points);
 }

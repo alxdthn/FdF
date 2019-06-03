@@ -6,17 +6,22 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 16:40:26 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/02 00:04:15 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/03 02:41:59 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # include <mlx.h>
+# include <math.h>
 # include "ft_printf.h"
 # define BUFF 5000
 # define DEFAULT_COLOR 0x42f4bf
-# define LINE 50
+# define LINE 100
+# define LST_X ((t_info *)lst->content)->x
+# define LST_Y ((t_info *)lst->content)->y
+# define LST_Z ((t_info *)lst->content)->z
+# define LST_COLOR ((t_info *)lst->content)->color
 
 typedef struct		s_abs
 {
@@ -56,6 +61,11 @@ typedef struct		s_mlx
 	int				line_size;
 	int				img_width;
 	int				img_height;
+	int				points_x_count;
+	int				points_y_count;
+	int				win_margin;
+	int				vector_size;
+	int				mode;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	void			*img_ptr;
@@ -63,6 +73,8 @@ typedef struct		s_mlx
 	t_point			***points;
 }					t_mlx;
 
-t_point		***fdf_parce(char *file);
+int					g_size;
+
+t_point	***fdf_parce(char *file, int *points_x_count, int *points_y_count);
 
 #endif
