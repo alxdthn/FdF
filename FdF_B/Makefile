@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/05/29 20:49:05 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/06 17:40:58 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC_DIR = src/
 OBJ_DIR = obj/
 
 HEADER = -I includes
-LIBFT = libft/libft.a
+LIBFT = ../libft/libft.a
 MLX_LIB = -L ../../../usr/local/lib/ -lmlx
 MLX_HEAD = -I ../../../usr/local/include
 FRAMEWORK = -framework OpenGL -framework AppKit
