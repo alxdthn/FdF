@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/08 15:02:28 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/13 06:08:12 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/13 15:26:22 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,8 +122,10 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 clean:
 	@rm -f $(O_PATH)
 	@rm -rf $(OBJ_DIR)
+	@make -C ft_printf clean
 
 fclean: clean
 	@rm -f $(NAME)
+	@make -C ft_printf fclean
 
 re: fclean all
