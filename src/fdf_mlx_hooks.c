@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 05:43:21 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/13 06:12:17 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/13 16:10:49 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int		mouse_move(int x, int y, t_mlx *mlx)
 
 int		mouse_press(int button, int x, int y, t_mlx *mlx)
 {
-	int		ret;
-
 	if (button == 1 && x < 202 && y > 1350)
 		fdf_switch(&MENU_BUTTON_MODE, &MENU_MODE);
 	else if (button == 1)
@@ -45,6 +43,8 @@ int		mouse_press(int button, int x, int y, t_mlx *mlx)
 
 int		mouse_release(int button, int x, int y, t_mlx *mlx)
 {
+	mlx->mouse.last_posx = x;
+	mlx->mouse.last_posy = y;
 	if (button == 1)
 		mlx->mouse.startus = 0;
 	return (0);
@@ -54,6 +54,7 @@ int		key_press(int key, t_mlx *mlx)
 {
 	int		ret;
 
+	ret = 0;
 	rotate_handle(mlx, key);
 	if (size_handle(mlx, key))
 		ret = 0;
@@ -67,8 +68,6 @@ int		key_press(int key, t_mlx *mlx)
 
 int		deal_key(int key, t_mlx *mlx)
 {
-	void		*conv;
-
 	if (key == ESC)
 	{
 		ft_arraydel((void **)POINTS);
@@ -84,7 +83,7 @@ int		deal_key(int key, t_mlx *mlx)
 		Z_ANGLE = 0;
 	}
 	else if (key == C_KEY)
-		COLORED = (COLORED) ? 0 : 1;
+		COLOR_STATUS = (COLOR_STATUS) ? 0 : 1;
 	else if (key == CTRL)
 		fdf_switch(&MENU_BUTTON_MODE, &MENU_MODE);
 	draw_mlx(mlx);

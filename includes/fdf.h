@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 16:40:26 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/13 06:32:40 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/13 15:56:49 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@
 # define TMP tmp
 # define TMP_NEXT tmp->next
 
-# define COLORED mlx->img.color_mode
+# define COLOR_STATUS mlx->img.color_status
 
 # define MLX_PTR mlx->mlx_ptr
 # define WIN_PTR mlx->win_ptr
@@ -152,7 +152,7 @@ typedef struct		s_image
 	t_vertex		**points;
 	int				posx;
 	int				posy;
-	int				color_mode;
+	int				color_status;
 	int				start_size;
 	int				size;
 	int				depth;

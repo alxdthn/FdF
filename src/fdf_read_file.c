@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 05:25:52 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/13 05:35:11 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/13 16:08:29 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	get_clr(t_mlx *mlx, t_point *point, char *buf, size_t *i)
 	int		base;
 
 	(*i)++;
+	base = 10;
 	if (buf[*i] && buf[*i] == '0')
 	{
 		(*i)++;

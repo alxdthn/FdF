@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 09:52:28 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/13 06:07:23 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/13 16:13:41 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	img_init(t_mlx *mlx)
 		START_SIZE = (WIN_WIDTH - WIN_WIDTH / 100 * MARGIN)
 		/ ((Y_SIZE + Z_SIZE) * 2);
 	set_start_param(mlx);
-	COLORED = 0;
+	COLOR_STATUS = 1;
+	mlx->mouse.startus = 0;
 }
 
 void	fdf_switch(char *mode1, char *mode2)
@@ -70,6 +71,7 @@ int		main(int ac, char **av)
 		fdf_exit("file is not .fdf\n", 1);
 	if ((fd = open(av[1], O_RDONLY)) < 3)
 		fdf_exit("can't open file\n", 0);
+	mlx = NULL;
 	mlx = fdf_parce(mlx, fd);
 	WIN_WIDTH = 2560;
 	WIN_HEIGHT = 1440;

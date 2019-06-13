@@ -6,7 +6,7 @@
 /*   By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 04:34:07 by nalexand          #+#    #+#             */
-/*   Updated: 2019/06/13 04:44:49 by nalexand         ###   ########.fr       */
+/*   Updated: 2019/06/13 16:07:34 by nalexand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	set_pixel(t_mlx *mlx, t_points *p)
 {
 	int		color;
 
-	if (COLORED)
+	if (COLOR_STATUS)
 		color = get_gradient(&p->p1, &p->p2, &p->delta, &p->start);
 	else
 		color = DEFAULT_COLOR;
@@ -73,9 +73,9 @@ void	draw_line(t_mlx *mlx, t_vertex *p1, t_vertex *p2)
 
 void	draw_vectors(t_mlx *mlx)
 {
-	size_t	x;
-	size_t	y;
-	size_t	current;
+	int		x;
+	int		y;
+	int		current;
 
 	y = 0;
 	x = 0;

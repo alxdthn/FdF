@@ -6,7 +6,7 @@
 #    By: nalexand <nalexand@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/29 16:28:19 by nalexand          #+#    #+#              #
-#    Updated: 2019/06/13 06:30:44 by nalexand         ###   ########.fr        #
+#    Updated: 2019/06/13 16:20:15 by nalexand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIB = fdf.a
 
 LIBFT = libft
 
-CС = gcc -g
+C_FLAGS = -Wall -Werror -Wextra -g
 
 SRC_DIR = src/
 
@@ -47,7 +47,7 @@ O_PATH = $(addprefix $(OBJ_DIR), $(OBJ))
 all: $(NAME)
 
 $(NAME): $(LIB)
-	gcc -g -o $(NAME) src/main.c $(MLX_HEAD) $(MLX_LIB) $(FRAMEWORK) $(HEADER) $(LIB)
+	gcc $(C_FLAGS) -o $(NAME) src/main.c $(MLX_HEAD) $(MLX_LIB) $(FRAMEWORK) $(HEADER) $(LIB)
 
 
 $(LIB): $(OBJ_DIR) $(O_PATH)
@@ -60,7 +60,7 @@ $(OBJ_DIR):
 	mkdir -p obj
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	gcc -g -c $< -o $@ $(HEADER)
+	gcc $(C_FLAGS) -c $< -o $@ $(HEADER)
 
 clean:
 	@rm -f $(O_PATH)
